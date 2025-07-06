@@ -3,10 +3,10 @@ import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-/*   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  }, */
+  /*   {
+      path: 'home',
+      loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    }, */
   {
     path: 'login',
     loadComponent: () => import('./auth/login/login.page').then(m => m.LoginPage)
@@ -51,10 +51,9 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['Profesor', 'Administrativo'] },
   },
+
   {
-    path: 'matricular-estudiante',
-    loadComponent: () => import('./pages/matricular-estudiante/matricular-estudiante.page').then(m => m.MatricularEstudiantePage),
-    canActivate: [AuthGuard],
-    data: { roles: ['Estudiante','Profesor', 'Administrativo'] },
+    path: 'dashboard-admin',
+    loadComponent: () => import('./pages/dashboard-admin/dashboard-admin.page').then(m => m.DashboardAdminPage)
   },
 ];

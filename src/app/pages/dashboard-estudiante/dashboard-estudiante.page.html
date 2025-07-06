@@ -1,14 +1,53 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>dashboard-estudiante</ion-title>
-    <ion-button color="danger" (click)="logout()">Cerrar sesión</ion-button>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{ estudiante?.nombre }} 
+      <br>
+      <h6 style="margin:0">{{ rol }}</h6>
+    </ion-title>
+    <ion-buttons slot="end">
+      <img src="" style="height: 40px;" />
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">dashboard-estudiante</ion-title>
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menú</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item button (click)="seleccionarSeccion('perfil')">Mi Perfil</ion-item>
+      <ion-item button (click)="seleccionarSeccion('cambiar-contrasena')">Cambiar Contraseña</ion-item>
+      <ion-item button (click)="seleccionarSeccion('tramite')">Trámite de Matrícula</ion-item>
+      <ion-item button (click)="seleccionarSeccion('matricula')" [disabled]="!puedeMatricular">Matricular</ion-item>
+      <ion-item button (click)="seleccionarSeccion('reclamo')">Reclamo de Notas</ion-item>
+      <ion-item button (click)="seleccionarSeccion('info')">Información de Interés</ion-item>
+      <ion-item button (click)="seleccionarSeccion('profesores')">Ver Profesores</ion-item>
+      <ion-item button (click)="seleccionarSeccion('notas')">Ver Notas</ion-item>
+      <ion-item button (click)="seleccionarSeccion('pago')">Pagar Matrícula</ion-item>
+      <ion-item button (click)="seleccionarSeccion('recibos')">Ver Recibos</ion-item>
+      <ion-item button (click)="logout()">Salir</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content id="main-content" class="ion-padding">
+  <ng-container [ngSwitch]="seccionActiva">
+    <app-perfil *ngSwitchCase="'perfil'" [estudiante]="estudiante"></app-perfil>
+    <app-cambiar-contrasena *ngSwitchCase="'cambiar-contrasena'" [usuario]="usuario"></app-cambiar-contrasena>
+    <app-tramite *ngSwitchCase="'tramite'"></app-tramite>
+    <app-matricula *ngSwitchCase="'matricula'"></app-matricula>
+    <app-reclamo *ngSwitchCase="'reclamo'"></app-reclamo>
+    <app-informacion *ngSwitchCase="'info'"></app-informacion>
+    <app-profesores *ngSwitchCase="'profesores'"></app-profesores>
+    <app-notas *ngSwitchCase="'notas'"></app-notas>
+    <app-pago *ngSwitchCase="'pago'"></app-pago>
+    <app-recibos *ngSwitchCase="'recibos'"></app-recibos>
+  </ng-container>
 </ion-content>

@@ -14,9 +14,10 @@ import { IonicModule } from '@ionic/angular'
 export class RegisterPage {
   registerForm: FormGroup;
   roles = [
-    { id: 1, nombre: 'Administrativo' },
-    { id: 2, nombre: 'Profesor' },
-    { id: 3, nombre: 'Estudiante' },
+    { id: 2, nombre: 'Administrativo' },
+    { id: 3, nombre: 'Profesor' },
+    { id:  4, nombre: 'Estudiante' },
+    { id: 1, nombre: "Administrador" }
   ];
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
@@ -25,7 +26,7 @@ export class RegisterPage {
       password: ['', Validators.required],
       nombre: ['', Validators.required],
       cedula: ['', Validators.required],
-      fecha_nac:['', Validators.required],
+      fecha_nac: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
       rol: ['', Validators.required],
     });
@@ -39,7 +40,7 @@ export class RegisterPage {
       fecha_nac,
       username,
       password,
-      correo, 
+      correo,
       rol
     }).subscribe(() => {
       this.router.navigate(['/login']);
